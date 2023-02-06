@@ -17,7 +17,6 @@ export const App = () => {
 
     if (storeData) {
       dispatch({ type: 'GET_DATA', payload: storeData });
-      console.log('getFromStore');
       return;
     }
 
