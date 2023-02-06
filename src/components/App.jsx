@@ -26,7 +26,6 @@ export const App = () => {
       dispatch({ type: 'IS_LOADING', payload: true });
       try {
         const data = await getAll();
-        console.log('getFromAPI');
         store.set('statistick', data);
         dispatch({ type: 'GET_DATA', payload: data });
       } catch (e) {
