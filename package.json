@@ -1,7 +1,7 @@
 {
   "name": "react-pet-coronavirus-statistics",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://sl7one.github.io/react-pet-coronavirus-statistics/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
