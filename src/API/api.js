@@ -11,5 +11,3 @@ export async function getAll() {
     console.error(error);
   }
 }
-
-console.log('object');
