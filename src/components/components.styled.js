@@ -154,4 +154,7 @@ export const HeaderTitle = styled.h1`
   color: #000000;
 `;
 export const Wrapper = styled.div`
- width: 1200px, margin: 0 auto; font-size: 25px; `;
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 25px;
+`;
