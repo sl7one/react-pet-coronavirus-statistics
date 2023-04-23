@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
+import Modal from 'react-modal';
+
+import { gsap } from 'gsap';
 import { observer } from 'mobx-react-lite';
-import ico1 from '../../assets/img/Vector.svg';
+import { coronavirusStore } from 'store/coronavirusStore';
+
 import ico2 from '../../assets/img/Vector1.svg';
 import ico3 from '../../assets/img/Vector2.svg';
+import ico1 from '../../assets/img/Vector.svg';
 import {
    Button,
    StatsCount,
@@ -12,13 +18,17 @@ import {
    Title,
 } from '../../styles/components.styled';
 import { customStyles } from '../../styles/modal.cssModule';
-import Modal from 'react-modal';
-import { coronavirusStore } from 'store/coronavirusStore';
+
 Modal.setAppElement('#root');
 
 export const StatsCovidModal = observer(() => {
    const { setIsShowModal, isShowModal, userTarget } = coronavirusStore;
    const { Country, TotalConfirmed, TotalDeaths, TotalRecovered } = userTarget;
+
+   useEffect(() => {
+      isShowModal &&
+         gsap.fromTo('.ReactModal__Content', { y: -100 }, { y: 0, duration: 1 });
+   }, [isShowModal]);
 
    return (
       <Modal

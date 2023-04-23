@@ -16,14 +16,6 @@ export const App = observer(() => {
       getStatistic();
    }, [getStatistic]);
 
-   // const onClickSort = () => dispatch({ type: 'IS_SORTED' });
-
-   // const filtredData = () => utilsFilter(sorted, list, filter);
-
-   // const setFilter = (val) => {
-   //    dispatch({ type: 'SET_FILTER', payload: val.trim() });
-   // };
-
    return (
       <Wrapper>
          <Header />

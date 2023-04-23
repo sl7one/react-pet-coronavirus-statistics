@@ -1,3 +1,6 @@
+import { useEffect, useRef } from 'react';
+
+import { gsap } from 'gsap';
 import { observer } from 'mobx-react-lite';
 import { coronavirusStore } from 'store/coronavirusStore';
 
@@ -14,6 +17,18 @@ import {
 export const Table = observer(() => {
    const { statistic, setIsShowModal, setFilter, filter, isSort, setSort } =
       coronavirusStore;
+   const ref = useRef([]);
+
+   useEffect(() => {
+      gsap.fromTo(
+         ref.current,
+         {
+            x: -100,
+            opacity: 0,
+         },
+         { x: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'bounce.out' }
+      );
+   }, []);
 
    const onClickItemList = (id) => {
       setIsShowModal(
@@ -28,24 +43,17 @@ export const Table = observer(() => {
            Country.toLowerCase().includes(filter.toLowerCase().trim())
         );
 
-   const toTop = (a, b) => a - b;
-   const toDown = (a, b) => b - a;
-
-   isSort
-      ? list.slice().sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) => toTop(a, b))
-      : list.slice().sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) => toDown(a, b));
-
-   const items = list.map(({ ID, Country, TotalConfirmed }, index) => (
+   const items = list.slice(0, 5).map(({ ID, Country, TotalConfirmed }, index) => (
       <Row
          key={ID}
          onClick={() => onClickItemList(ID)}
+         ref={(el) => ref.current.push(el)}
       >
          <Col>{index + 1}</Col>
          <Col>{Country}</Col>
          <Col>{TotalConfirmed}</Col>
       </Row>
    ));
-
    return (
       <>
          <ListHeader>

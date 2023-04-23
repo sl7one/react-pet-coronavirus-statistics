@@ -44,6 +44,17 @@ class CoronavirusStore {
 
    setSort(value) {
       this.isSort = value;
+
+      const toTop = (a, b) => a - b;
+      const toDown = (a, b) => b - a;
+
+      this.isSort
+         ? this.statistic.sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) =>
+              toTop(a, b)
+           )
+         : this.statistic.sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) =>
+              toDown(a, b)
+           );
    }
 }
 
