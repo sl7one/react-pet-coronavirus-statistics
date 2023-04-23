@@ -23,7 +23,6 @@ export const Table = observer(() => {
       isSort,
       setSort,
       pagination,
-      page,
    } = coronavirusStore;
    const ref = useRef([]);
 
