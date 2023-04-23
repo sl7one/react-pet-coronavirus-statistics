@@ -4,13 +4,13 @@ import { Loader } from 'components/Loader/Loader';
 import { observer } from 'mobx-react-lite';
 import { coronavirusStore } from 'store/coronavirusStore';
 
-import { Wrapper } from '../../styles/components.styled';
+import { LoadMore, Wrapper } from '../../styles/components.styled';
 import { Header } from '../Header/Header';
 import { StatsCovidModal } from '../StatsModalCovid/StatsCovidModal';
 import { Table } from '../Table/Table';
 
 export const App = observer(() => {
-   const { isLoading, getStatistic } = coronavirusStore;
+   const { isLoading, getStatistic, setPage, pagination } = coronavirusStore;
 
    useEffect(() => {
       getStatistic();
@@ -20,6 +20,14 @@ export const App = observer(() => {
       <Wrapper>
          <Header />
          {isLoading ? <Loader /> : <Table />}
+
+         <LoadMore
+            type="button"
+            onClick={() => setPage()}
+            disabled={!pagination().isShowBtn}
+         >
+            Load More
+         </LoadMore>
 
          <StatsCovidModal />
       </Wrapper>

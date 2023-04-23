@@ -11,6 +11,7 @@ class CoronavirusStore {
    userTarget = {};
    filter = '';
    isSort = false;
+   page = 1;
 
    constructor() {
       makeAutoObservable(this, {}, { autoBind: true });
@@ -55,6 +56,21 @@ class CoronavirusStore {
          : this.statistic.sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) =>
               toDown(a, b)
            );
+   }
+
+   setPage() {
+      this.page += 1;
+   }
+
+   pagination() {
+      const perPage = 8;
+      const end = this.page * perPage;
+
+      if (end + perPage >= this.statistic.length) {
+         return { end: this.statistic.length, isShowBtn: false };
+      }
+
+      return { end, isShowBtn: true };
    }
 }
 

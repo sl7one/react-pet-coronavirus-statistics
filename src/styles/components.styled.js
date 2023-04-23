@@ -155,6 +155,8 @@ export const Wrapper = styled.div`
    margin: 0 auto;
    font-size: 25px;
    padding: 0 40px;
+   display: flex;
+   flex-direction: column;
 `;
 export const LoaderBox = styled.div`
    display: flex;
@@ -162,4 +164,22 @@ export const LoaderBox = styled.div`
    justify-content: center;
    width: 100%;
    height: 100%;
+`;
+export const LoadMore = styled.button`
+   margin: 0 auto;
+   margin-top: 30px;
+   padding: 14px 28px;
+   font-weight: 600;
+   font-size: 18px;
+   text-transform: uppercase;
+   color: #373737;
+   background-color: orange;
+   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+   border-radius: 10.3108px;
+
+   transition: all 350ms ease-in-out;
+
+   &: hover {
+      transform: scale(1.1);
+   }
 `;

@@ -15,8 +15,16 @@ import {
 } from '../../styles/components.styled';
 
 export const Table = observer(() => {
-   const { statistic, setIsShowModal, setFilter, filter, isSort, setSort } =
-      coronavirusStore;
+   const {
+      statistic,
+      setIsShowModal,
+      setFilter,
+      filter,
+      isSort,
+      setSort,
+      pagination,
+      page,
+   } = coronavirusStore;
    const ref = useRef([]);
 
    useEffect(() => {
@@ -43,17 +51,19 @@ export const Table = observer(() => {
            Country.toLowerCase().includes(filter.toLowerCase().trim())
         );
 
-   const items = list.slice(0, 5).map(({ ID, Country, TotalConfirmed }, index) => (
-      <Row
-         key={ID}
-         onClick={() => onClickItemList(ID)}
-         ref={(el) => ref.current.push(el)}
-      >
-         <Col>{index + 1}</Col>
-         <Col>{Country}</Col>
-         <Col>{TotalConfirmed}</Col>
-      </Row>
-   ));
+   const items = list
+      .slice(0, pagination().end)
+      .map(({ ID, Country, TotalConfirmed }, index) => (
+         <Row
+            key={ID}
+            onClick={() => onClickItemList(ID)}
+            ref={(el) => ref.current.push(el)}
+         >
+            <Col>{index + 1}</Col>
+            <Col>{Country}</Col>
+            <Col>{TotalConfirmed}</Col>
+         </Row>
+      ));
    return (
       <>
          <ListHeader>
