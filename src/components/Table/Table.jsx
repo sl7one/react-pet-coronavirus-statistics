@@ -1,6 +1,3 @@
-import { useEffect, useRef } from 'react';
-
-import { gsap } from 'gsap';
 import { observer } from 'mobx-react-lite';
 import { coronavirusStore } from 'store/coronavirusStore';
 
@@ -18,51 +15,38 @@ export const Table = observer(() => {
    const {
       statistic,
       setIsShowModal,
+      setUserCountry,
       setFilter,
       filter,
       isSort,
       setSort,
       pagination,
    } = coronavirusStore;
-   const ref = useRef([]);
 
-   useEffect(() => {
-      gsap.fromTo(
-         ref.current,
-         {
-            x: -100,
-            opacity: 0,
-         },
-         { x: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'bounce.out' }
-      );
-   }, []);
-
-   const onClickItemList = (id) => {
-      setIsShowModal(
-         true,
-         statistic.find(({ ID }) => id === ID)
-      );
+   const onClickItemList = (country) => {
+      setIsShowModal(true);
+      setUserCountry(country);
    };
 
    const list = !filter
       ? statistic
-      : statistic.filter(({ Country }) =>
-           Country.toLowerCase().includes(filter.toLowerCase().trim())
+      : statistic.filter(({ country }) =>
+           country.toLowerCase().includes(filter.toLowerCase().trim())
         );
 
    const items = list
       .slice(0, pagination().end)
-      .map(({ ID, Country, TotalConfirmed }, index) => (
+      .map(({ id, cases: { total }, country }, index) => (
          <Row
-            key={ID}
-            onClick={() => onClickItemList(ID)}
-            ref={(el) => ref.current.push(el)}
+            key={id}
+            onClick={() => onClickItemList(country)}
          >
             <Col>{index + 1}</Col>
-            <Col>{Country}</Col>
-            <Col>{TotalConfirmed}</Col>
+            <Col>{country}</Col>
+            <Col>{total}</Col>
          </Row>
       ));
+
    return (
       <>
          <ListHeader>

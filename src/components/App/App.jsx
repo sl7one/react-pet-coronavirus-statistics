@@ -10,7 +10,7 @@ import { StatsCovidModal } from '../StatsModalCovid/StatsCovidModal';
 import { Table } from '../Table/Table';
 
 export const App = observer(() => {
-   const { isLoading, getStatistic, setPage, pagination } = coronavirusStore;
+   const { isLoading, getStatistic, setPage, pagination, filter } = coronavirusStore;
 
    useEffect(() => {
       getStatistic();
@@ -19,15 +19,22 @@ export const App = observer(() => {
    return (
       <Wrapper>
          <Header />
-         {isLoading ? <Loader /> : <Table />}
-
-         <LoadMore
-            type="button"
-            onClick={() => setPage()}
-            disabled={!pagination().isShowBtn}
-         >
-            Load More
-         </LoadMore>
+         {isLoading ? (
+            <Loader />
+         ) : (
+            <>
+               <Table />
+               {filter ? null : (
+                  <LoadMore
+                     type="button"
+                     onClick={() => setPage()}
+                     disabled={!pagination().isShowBtn}
+                  >
+                     Load More
+                  </LoadMore>
+               )}
+            </>
+         )}
 
          <StatsCovidModal />
       </Wrapper>

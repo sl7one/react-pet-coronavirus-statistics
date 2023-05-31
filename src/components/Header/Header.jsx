@@ -1,5 +1,5 @@
-import { HeaderTitle, HeaderBox } from '../../styles/components.styled';
 import logo from '../../assets/img/logo.png';
+import { HeaderBox, HeaderTitle } from '../../styles/components.styled';
 
 export const Header = () => {
    return (
@@ -7,7 +7,7 @@ export const Header = () => {
          <img
             src={logo}
             alt="logo"
-            width={200}
+            width={100}
          />
          <HeaderTitle>statistics</HeaderTitle>
       </HeaderBox>

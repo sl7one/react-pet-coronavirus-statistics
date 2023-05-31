@@ -1,20 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-import { gsap } from 'gsap';
+import { getCountryStats } from 'API/api';
+import { Loader } from 'components/Loader/Loader';
 import { observer } from 'mobx-react-lite';
 import { coronavirusStore } from 'store/coronavirusStore';
 
-import ico2 from '../../assets/img/Vector1.svg';
-import ico3 from '../../assets/img/Vector2.svg';
-import ico1 from '../../assets/img/Vector.svg';
 import {
    Button,
-   StatsCount,
-   StatsIcon,
-   StatsInfo,
+   StatsDate,
    StatsItem,
    StatsList,
+   StatsTotal,
    Title,
 } from '../../styles/components.styled';
 import { customStyles } from '../../styles/modal.cssModule';
@@ -22,13 +19,32 @@ import { customStyles } from '../../styles/modal.cssModule';
 Modal.setAppElement('#root');
 
 export const StatsCovidModal = observer(() => {
-   const { setIsShowModal, isShowModal, userTarget } = coronavirusStore;
-   const { Country, TotalConfirmed, TotalDeaths, TotalRecovered } = userTarget;
+   const { setIsShowModal, isShowModal, userCountry } = coronavirusStore;
+   const [userData, setUserData] = useState({ isLoading: false, error: '', data: {} });
+   const { isLoading, data } = userData;
 
    useEffect(() => {
-      isShowModal &&
-         gsap.fromTo('.ReactModal__Content', { y: -100 }, { y: 0, duration: 1 });
-   }, [isShowModal]);
+      const getData = async () => {
+         setUserData((prev) => ({
+            ...prev,
+            isLoading: true,
+         }));
+         try {
+            const [data] = await getCountryStats(userCountry);
+            setUserData((prev) => ({ ...prev, data }));
+         } catch (e) {
+            setUserData((prev) => ({ ...prev, error: e.message }));
+         } finally {
+            setUserData((prev) => ({
+               ...prev,
+               isLoading: false,
+            }));
+         }
+      };
+      getData();
+   }, [userCountry]);
+
+   const { country, cases } = data;
 
    return (
       <Modal
@@ -36,42 +52,28 @@ export const StatsCovidModal = observer(() => {
          shouldCloseOnOverlayClick={true}
          style={customStyles}
       >
-         <Title>{Country}</Title>
-         <StatsList>
-            <StatsItem>
-               <StatsIcon
-                  src={ico1}
-                  alt="pic"
-                  width="23"
-               />
-               <StatsInfo>Total Confirmed</StatsInfo>
-               <StatsCount>{TotalConfirmed}</StatsCount>
-            </StatsItem>
-            <StatsItem>
-               <StatsIcon
-                  src={ico2}
-                  alt="pic"
-                  width="23"
-               />
-               <StatsInfo>Total Deaths</StatsInfo>
-               <StatsCount>{TotalDeaths}</StatsCount>
-            </StatsItem>
-            <StatsItem>
-               <StatsIcon
-                  src={ico3}
-                  alt="pic"
-                  width="23"
-               />
-               <StatsInfo>Total Recovered</StatsInfo>
-               <StatsCount>{TotalRecovered}</StatsCount>
-            </StatsItem>
-         </StatsList>
-         <Button
-            type="button"
-            onClick={() => setIsShowModal(false)}
-         >
-            OK
-         </Button>
+         {isLoading ? (
+            <Loader />
+         ) : (
+            <>
+               <Title>{country}</Title>
+               <StatsList>
+                  {Object.entries(cases).map(([date, stats], idx) => (
+                     <StatsItem key={idx}>
+                        <StatsDate>{date}</StatsDate>
+                        <StatsTotal>total: {stats.total}</StatsTotal>
+                        <StatsTotal>new: {stats.new}</StatsTotal>
+                     </StatsItem>
+                  ))}
+               </StatsList>
+               <Button
+                  type="button"
+                  onClick={() => setIsShowModal(false)}
+               >
+                  OK
+               </Button>
+            </>
+         )}
       </Modal>
    );
 });

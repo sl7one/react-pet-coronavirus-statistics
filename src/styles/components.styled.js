@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const ListHeader = styled.div`
    display: flex;
-   overflow: hidden;
-   background: #2196f3;
+   align-items: center;
+   background-color: #2196f3;
    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
    border-radius: 20px;
    margin-bottom: 20px;
@@ -12,6 +12,9 @@ export const ListBody = styled.div`
    display: flex;
    flex-direction: column;
    gap: 20px;
+   overflow-y: scroll;
+   height: 50vh;
+   padding: 20px 0;
 `;
 export const Row = styled.div`
    display: flex;
@@ -28,7 +31,7 @@ export const Row = styled.div`
    }
 `;
 export const Col = styled.div`
-   padding: 30px;
+   padding: 15px;
    border-right: 1px solid #b2b2b2;
 
    font-weight: 700;
@@ -40,16 +43,19 @@ export const Col = styled.div`
    }};
 
    &:nth-child(1) {
-      flex: 0.1;
+      flex: 0.1 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
    }
 
    &:nth-child(2) {
       display: flex;
       align-items: center;
-      flex: 3;
+      flex: 3 500px;
    }
    &:nth-child(3) {
-      flex: 1;
+      flex: 1 300px;
       border-right: unset;
       display: flex;
       align-items: center;
@@ -70,13 +76,14 @@ export const Triangle = styled.button`
    outline: none;
    background-color: transparent;
 `;
-export const Button = styled.div`
+export const Button = styled.button`
    background: #2196f3;
    border-radius: 20px;
    padding: 11px 70px;
    font-weight: 700;
    font-size: 24px;
    line-height: calc(28 / 24);
+   margin: 0 auto;
    margin-top: 36px;
    cursor: pointer;
 
@@ -88,40 +95,42 @@ export const Title = styled.h2`
    line-height: 56px;
 
    color: #000000;
-   margin: 0;
+   margin: 0 auto;
 `;
 export const StatsList = styled.ul`
    margin: 0;
-   padding: 0;
+   padding: 10px 0;
    display: flex;
    flex-direction: column;
    width: 100%;
    list-style: none;
    justify-content: center;
    align-items: center;
-   gap: 48px;
+   gap: 3px;
    margin-top: 40px;
+   overflow-y: scroll;
+   height: 50vh;
 `;
+
 export const StatsItem = styled.li`
    display: flex;
-   width: 100%;
+   gap: 10px;
+   width: 50%;
 `;
-export const StatsIcon = styled.img`
-   display: block;
-   margin-right: 30px;
-`;
-export const StatsInfo = styled.span`
-   display: block;
-   font-weight: 400;
-   font-size: 24px;
-   line-height: calc(28 / 24);
 
-   color: #666666;
+export const StatsDate = styled.p`
+   margin: 0;
+   padding: 0;
+   font-weight: 600;
+   flex: 1 100px;
 `;
-export const StatsCount = styled(StatsInfo)`
-   margin-left: auto;
-   color: green;
+
+export const StatsTotal = styled.p`
+   margin: 0;
+   padding: 0;
+   flex: 1 150px;
 `;
+
 export const Input = styled.input`
    display: block;
    height: 100%;
@@ -142,12 +151,14 @@ export const Input = styled.input`
 `;
 export const HeaderBox = styled.header`
    display: flex;
+   align-items: center;
 `;
 export const HeaderTitle = styled.h1`
    font-weight: 700;
    font-size: 72px;
    line-height: calc(84 / 72);
    text-transform: uppercase;
+   margin: 30px 0;
 
    color: #000000;
 `;
@@ -179,7 +190,8 @@ export const LoadMore = styled.button`
 
    transition: all 350ms ease-in-out;
 
-   &: hover {
+   &:hover {
       transform: scale(1.1);
+      cursor: pointer;
    }
 `;

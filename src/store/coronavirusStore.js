@@ -8,7 +8,7 @@ class CoronavirusStore {
    statistic = [];
    error = '';
    isShowModal = false;
-   userTarget = {};
+   userCountry = '';
    filter = '';
    isSort = false;
    page = 1;
@@ -34,9 +34,12 @@ class CoronavirusStore {
       }
    }
 
-   setIsShowModal(bool, countryInfo = {}) {
+   setIsShowModal(bool) {
       this.isShowModal = bool;
-      this.userTarget = countryInfo;
+   }
+
+   setUserCountry(userCountry) {
+      this.userCountry = userCountry;
    }
 
    setFilter(value) {
@@ -50,10 +53,10 @@ class CoronavirusStore {
       const toDown = (a, b) => b - a;
 
       this.isSort
-         ? this.statistic.sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) =>
+         ? this.statistic.sort(({ cases: { total: a } }, { cases: { total: b } }) =>
               toTop(a, b)
            )
-         : this.statistic.sort(({ TotalConfirmed: a }, { TotalConfirmed: b }) =>
+         : this.statistic.sort(({ cases: { total: a } }, { cases: { total: b } }) =>
               toDown(a, b)
            );
    }
