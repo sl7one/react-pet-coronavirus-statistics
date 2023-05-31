@@ -1,18 +1,15 @@
 {
   "files": {
     "main.css": "/react-pet-coronavirus-statistics/static/css/main.7acaea2f.css",
-    "main.js": "/react-pet-coronavirus-statistics/static/js/main.08d5e97f.js",
+    "main.js": "/react-pet-coronavirus-statistics/static/js/main.4cc6d167.js",
     "static/media/logo.png": "/react-pet-coronavirus-statistics/static/media/logo.05d5d99b6d241acc6875.png",
-    "static/media/Vector1.svg": "/react-pet-coronavirus-statistics/static/media/Vector1.842606bb896d6b913e1c71d17b6fcce5.svg",
     "index.html": "/react-pet-coronavirus-statistics/index.html",
-    "static/media/Vector2.svg": "/react-pet-coronavirus-statistics/static/media/Vector2.edd4f3fde8945ae1a234701d5f84985b.svg",
-    "static/media/Vector.svg": "/react-pet-coronavirus-statistics/static/media/Vector.9257d4386f4611ccf4ccf048c88464a8.svg",
     "static/media/find.svg": "/react-pet-coronavirus-statistics/static/media/find.547431128429eabdc82b256b886f811f.svg",
     "main.7acaea2f.css.map": "/react-pet-coronavirus-statistics/static/css/main.7acaea2f.css.map",
-    "main.08d5e97f.js.map": "/react-pet-coronavirus-statistics/static/js/main.08d5e97f.js.map"
+    "main.4cc6d167.js.map": "/react-pet-coronavirus-statistics/static/js/main.4cc6d167.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.08d5e97f.js"
+    "static/js/main.4cc6d167.js"
   ]
 }
